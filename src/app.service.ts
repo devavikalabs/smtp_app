@@ -14,6 +14,7 @@ export class AppService {
   async sendMail(dto: ISendMailOptions) {
     try {
       const data: SentMessageInfo = await this.mailerService.sendMail(dto);
+      console.log('success notification', data);
       return { data: data, error: null };
     } catch (error) {
       return { data: null, error: error };
