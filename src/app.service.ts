@@ -11,6 +11,11 @@ export class AppService {
 
 
   async sendMail(dto: ISendMailOptions) {
-    return this.mailerService.sendMail(dto);
+    try {
+      const data = await this.mailerService.sendMail(dto);
+      return { data: data, error: null };
+    } catch (error) {
+      return { data: null, error: error };
+    }
   }
 }
