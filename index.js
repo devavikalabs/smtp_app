@@ -1,5 +1,18 @@
 const express = require("express");
+const nodemailer = require("nodemailer");
 const app = express();
+
+const transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true,
+    auth: {
+        user: "dev.avikalabs@gmail.com",
+        pass: "dwww rqpt lafe ylds",
+    }
+
+});
+
 
 app.use(express.json());
 
@@ -11,5 +24,15 @@ app.listen(PORT, () => {
 app.get("/", (req, res) => {
     res.json({ message: "hello world" });
 })
+
+app.post('send/mail', async (req, res) => {
+    const info = await transporter.sendMail({
+        from: "LMS Product dev.avikalabs@gmail.com",
+        ...req.body
+    });
+    console.log("Message sent: %s", info.messageId);
+    console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+    res.json(info);
+});
 
 
