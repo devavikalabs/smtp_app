@@ -26,9 +26,10 @@ app.get("/", (req, res) => {
 })
 
 app.post('send/mail', async (req, res) => {
+    const data = req.body;
     const info = await transporter.sendMail({
         from: "LMS Product dev.avikalabs@gmail.com",
-        ...req.body
+        ...data
     });
     console.log("Message sent: %s", info.messageId);
     console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
