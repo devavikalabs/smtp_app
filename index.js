@@ -25,7 +25,7 @@ app.get("/", (req, res) => {
     res.json({ message: "hello world" });
 })
 
-app.post('send/mail', async (req, res) => {
+app.post('/send/mail', async (req, res) => {
     const data = req.body;
     const info = await transporter.sendMail({
         from: "LMS Product dev.avikalabs@gmail.com",
